@@ -1,26 +1,32 @@
+//Connect To MongoDB Start
 const connectToMongo = require('./db');
 connectToMongo();
+//Connect To MongoDB End
 
+// Connect To express Server Start
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
+// Connect To express Server End
 
 // app.get('/', (req, res) => {
 //   res.send('Hello Nayeem!')
 // })
-
-// Available Routes
-
-app.use(express.json());
 
 // app.post('/', (req,res)=>{
 //   res.send(req.body);
 //   console.log(req.body)
 //   req.save
 // });
+
+// Available Routes
+app.use(express.json());
 app.use('/auth', require('./routes/auth'));
 app.use('/notes', require('./routes/notes'));
 
+
+// Connect to The Port Start
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+// Connect to The Port End

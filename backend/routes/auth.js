@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jsw_Screct = 'nayeemisCodingNow';
 
-// Create A New User Process/ Methos : Post '/auth/createUser' // No Login Required/ Start
+//Route 1: Create A New User Process/ Methos : Post '/auth/createUser' // No Login Required/ Start
 
 router.post('/createUser',[
     //validation fields Start
@@ -70,7 +70,7 @@ router.post('/createUser',[
 })
 
 
-//  Authentication a User Process/ Methos : Post '/auth/login' // No Login Required/ Start
+//Route 2:  Authentication a User Process/ Methos : Post '/auth/login' // No Login Required/ Start
 
 router.post('/login',[
     body('email','Plz Enter a valid Email').isEmail(),
@@ -130,7 +130,28 @@ router.post('/login',[
 //  Authentication a User Process/ Methos : Post '/auth/login' // No Login Required/ End
 
 
+
+//Route 3: Get User information to fetch token and header / Methos : Post '/auth/fetchuser' // Login Required/ Start
+
+
+router.post('/fetchuser', fetchuser , async (req, res)=>{
+    
+    try {
+        userId = "Todo";
+        const user = await User.findById(userId).select("-password");  
+    } catch (error) {
+        return res.status(500).json({error: 'Some Error Occurs!'});
+    }
+    
+
+})
+
+//Route 3: Get User information to fetch token and header / Methos : Post '/auth/fetchuser' // Login Required/ End
+
 //export router 
+
+
+
 
 module.exports = router
 

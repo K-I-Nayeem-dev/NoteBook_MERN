@@ -3,22 +3,24 @@ const express = require('express');
 const Notes = require('../models/Notes');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
-//import express End
+const fetchuser = require("../middlewere/fetchuser");
 
 
-// names.forEach((element)=>{
-//     details={
-//         id:1,
-//         names: element,
-//         age: 20,
-//     }
-// })
+// Route 1: Fetching all Notes form User : Method : get: // Login required Start
+
+router.get('/fetchallnotes', fetchuser, async (req, res)=>{
+    
+})
+
+// Route 1: Fetching all Notes form User : Method : get: // Login required End
 
 
-router.get('/insertNotes',
+// Route 2: Insert Notes by User : Method : post: // Login required Start
+
+router.post('/insertNotes', fetchuser,
 [
     body('title').isLength({ min:8 }),
-    body('description'),
+    body('description').isLength({min:10}),
     body('tags').isLength({min:10}),
 ], (req, res)=>{
 
@@ -49,5 +51,8 @@ router.get('/insertNotes',
     // res.send(req.body)
 
 });
+
+// Route 2: Insert Notes by User : Method : post: // Login required End
+
 
 module.exports = router

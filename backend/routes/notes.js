@@ -100,27 +100,30 @@ router.post('/insertNotes', fetchuser,
 // Route 4: Fetching all Notes form User : Method : get: // Login required Start
 
 router.put('/updatenote/:id', fetchuser, async (req, res)=>{
-    // object destructuring from req.body;
-    const {title, description, tags} = req.body
-    // Create a newNote Object
-    const newNote = {};
-    if(title){newNote.title = title};
-    if(description){newNote.description = description};
-    if(tags){newNote.tags = tags};
+    try {
+        // object destructuring from req.body;
+        const {title, description, tags} = req.body
+        // Create a newNote Object
+        const newNote = {};
+        if(title){newNote.title = title};
+        if(description){newNote.description = description};
+        if(tags){newNote.tags = tags};
 
-    //find the note to be updated to update it
-    let note = await Notes.findById(req.params.id);
-    if(!note){return res.status(404).send('Not Found')}
+        //find the note to be updated to update it
+        let note = await Notes.findById(req.params.id);
+        if(!note){return res.status(404).send('Not Found')}
 
-    // if req.user.id not equal to note.user.id then it thorw a error
-    if(note.user.toString() !== req.user.id){
-        return res.status(401).send("Not Allowed");
+        // if req.user.id not equal to note.user.id then it thorw a error
+        if(note.user.toString() !== req.user.id){
+            return res.status(401).send("Not Allowed");
+        }
+        
+        // if all method is fine then note will update
+        note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote}, {new:true} );
+        res.json({Success: "Note has been Updated", note});
+    } catch (error) {
+        return res.status(500).json("Some Error Occurs!");
     }
-    
-    // if all method is fine then note will update
-    note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote}, {new:true} );
-    
-    res.json({Success: "Note has been Updated", note});
 
 })
 
@@ -130,19 +133,23 @@ router.put('/updatenote/:id', fetchuser, async (req, res)=>{
 // Route 4: Fetching all Notes form User : Method : get: // Login required Start
 
 router.delete('/deletenote/:id', fetchuser, async (req, res)=>{
-    //find the note to be updated to update it
-    let note = await Notes.findById(req.params.id);
-    if(!note){return res.status(404).send('Not Found')}
+    try {
+        //find the note to be updated to update it
+        let note = await Notes.findById(req.params.id);
+        if(!note){return res.status(404).send('Not Found')}
 
-    // if req.user.id not equal to note.user.id then it thorw a error
-    if(note.user.toString() !== req.user.id){
-        return res.status(401).send("Not Allowed");
+        // if req.user.id not equal to note.user.id then it thorw a error
+        if(note.user.toString() !== req.user.id){
+            return res.status(401).send("Not Allowed");
+        }
+        
+        // if all method is fine then note will update
+        note = await Notes.findByIdAndDelete(req.params.id);
+        
+        res.json({Success: "Note has been Deleted", Note: note});
+    } catch (error) {
+        return res.status(500).json("Some Error Occurs!");
     }
-    
-    // if all method is fine then note will update
-    note = await Notes.findByIdAndDelete(req.params.id);
-    
-    res.json({Success: "Note has been Deleted", Note: note});
 
 })
 

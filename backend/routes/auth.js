@@ -4,7 +4,7 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const fetchuser = require("../middlewere/fetchuser");
+const fetchuser = require("../middleware/fetchuser");
 const jsw_Screct = "nayeemisCodingNow";
 
 //Route 1: Create A New User Process/ Methos : Post '/auth/createUser' // No Login Required/ Start
@@ -138,12 +138,18 @@ router.post("/login",
 
 router.post("/fetchuser", fetchuser, async (req, res) => {
     try {
+
+        //fetch login user id from Database to JWT
         const userId = req.user.id;
+        //select user by finding user id and select user details without password field
         const user = await User.findById(userId).select("-password");
+        //output user id,,, if show user id the it will works 
         console.log(userId)
+        //if user won't found then throw this error
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
+        //if '/fetchuser' route works fine then res.send will show output in TCE 
         res.send(user);
     } catch (error) {
         console.error(error); // Log the error for debugging purposes

@@ -14,7 +14,6 @@ const fetchuser = (req, res, next) => {
         req.user = data.user;
         next();
     } catch (error) {
-        console.log(res.user)
         return res.status(401).send({ error: "Please Authenticate a Valid User by Program Fault" });
     }
 

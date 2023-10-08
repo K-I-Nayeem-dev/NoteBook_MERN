@@ -120,7 +120,29 @@ router.put('/updatenote/:id', fetchuser, async (req, res)=>{
     // if all method is fine then note will update
     note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote}, {new:true} );
     
-    res.json({note});
+    res.json({Success: "Note has been Updated", note});
+
+})
+
+// Route 4: Fetching all Notes form User : Method : get: // Login required End
+
+
+// Route 4: Fetching all Notes form User : Method : get: // Login required Start
+
+router.delete('/deletenote/:id', fetchuser, async (req, res)=>{
+    //find the note to be updated to update it
+    let note = await Notes.findById(req.params.id);
+    if(!note){return res.status(404).send('Not Found')}
+
+    // if req.user.id not equal to note.user.id then it thorw a error
+    if(note.user.toString() !== req.user.id){
+        return res.status(401).send("Not Allowed");
+    }
+    
+    // if all method is fine then note will update
+    note = await Notes.findByIdAndDelete(req.params.id);
+    
+    res.json({Success: "Note has been Deleted", Note: note});
 
 })
 

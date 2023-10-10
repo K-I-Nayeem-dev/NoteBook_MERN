@@ -16,18 +16,11 @@
 
 // export default About
 
-import React, {useContext, useEffect} from 'react';
-import NoteContext from '../context/NoteContext';
+import React from 'react';
 
 const About = () => {
-  const a = useContext(NoteContext);
-
-  useEffect(()=>{
-    a.update();
-    // eslint-disable-next-line
-  })
   return (
-    <h1>This is {a.state.name} & i read in Class {a.state.class}</h1>
+    <h1>This is & i read in Class</h1>
   )
 }
 

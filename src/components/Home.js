@@ -1,8 +1,14 @@
-import React from 'react'
+
+import Notes from "./Notes";
 
 const Home = () => {
   return (
-    <h1>This is Home Section</h1>
+    <>
+    <div className="contianer">
+      {/* Notes Components  */}
+      <Notes/>
+    </div>
+    </>
   )
 }
 

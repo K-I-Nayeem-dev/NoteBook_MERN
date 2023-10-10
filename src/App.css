@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+i{
+  cursor: pointer;
+  color:red;
+  font-size: 18px;
+  transition: 0.8s;
+}
+
+i:nth-child(1){
+  color:orangered
+}
+
+i:hover{
+  color: white;
+  transition: 0.8s;
+  transform: scale(1.2);
+}

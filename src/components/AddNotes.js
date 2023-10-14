@@ -6,6 +6,7 @@ const AddNotes = () => {
     const context = useContext(NoteContext);
     const {addNotes} = context;
 
+
     //seleted Input Area By Id*****
     let title = document.querySelector('#title');
     let description = document.querySelector('#description');

@@ -49,7 +49,7 @@ i:nth-child(1){
 }
 
 i:hover{
-  color: white;
+  color: teal;
   transition: 0.8s;
   transform: scale(1.2);
 }

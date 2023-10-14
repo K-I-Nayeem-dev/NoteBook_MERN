@@ -20,17 +20,17 @@ function App() {
           {/* //Home Section */}
         
           <Routes>
-            <Route exact  path='/' element={<Home/>} />
+            <Route exact path='/' element={<Home/>} />
           </Routes>
 
           {/* //About Section */}
           <Routes>
-            <Route exact  path='/about' element={<About/>} />
+            <Route exact path='/about' element={<About/>} />
           </Routes>
 
           {/* //Blog Section */}
           <Routes>
-            <Route exact  path='/blog' element={<> <Blog/> </>}/>
+            <Route exact path='/blog' element={<> <Blog/> </>}/>
           </Routes>
         </div>
       </Router>    

@@ -1,6 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import NoteContext from '../context/notes/NoteContext';
 
 const NoteItems = (props) => {
+
+    const context = useContext(NoteContext);
+    const {deleteNote} = context;
+
+
     const {note} = props;
     return (
         <div className="col-lg-4 py-3">
@@ -13,7 +19,7 @@ const NoteItems = (props) => {
                     <p className="card-text text-muted">Date: {new Date(note.date).toLocaleDateString()}</p>
                     <div className="actions">
                         <i className="fa-solid fa-pen-to-square"></i>
-                        <i className="fa-solid fa-trash-can mx-3"></i>
+                        <i className="fa-solid fa-trash-can mx-3" onClick={()=>{deleteNote(note._id)}}></i>
                     </div>
                 </div>
             </div>

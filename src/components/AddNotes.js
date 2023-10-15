@@ -17,7 +17,7 @@ const AddNotes = () => {
     let tagErrorMsg = document.querySelector('.tagErrorMsg');
 
     //select Add notes fields by State*************
-    const [note, setNote] = useState({title: "", description: "", tags: "" , id: ""});
+    const [note, setNote] = useState({title: "", description: "", tags: ""});
 
     // Add Notes method And send Error if note fields empty***********
     const NoteHandler = (e)=>{
@@ -75,12 +75,11 @@ const AddNotes = () => {
 
         //Final Noted add
         if(note.title && note.description && note.tags){
-            addNotes(note.title, note.description, note.tags, Math.ceil(Math.random(note.id) * 10000000000) );
-
-            // Math.ceil(Math.random(note.id) * 10000000000)
+            addNotes(note.title, note.description, note.tags);
+            // console.log(Math.ceil(Math.random(note.id) * 10000000000));
         }
     }
-
+    
     const onChange = (e)=>{
         setNote({...note, [e.target.name] : e.target.value})
     }

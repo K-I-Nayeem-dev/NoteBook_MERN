@@ -6,6 +6,8 @@ const AddNotes = () => {
     const context = useContext(NoteContext);
     const {addNotes} = context;
 
+    let alert = document.querySelector('#success');
+
 
     //seleted Input Area By Id*****
     let title = document.querySelector('#title');
@@ -76,6 +78,15 @@ const AddNotes = () => {
         //Final Noted add
         if(note.title && note.description && note.tags){
             addNotes(note.title, note.description, note.tags);
+                // update successfully done message sent
+                alert.innerHTML = "Note Add Successfully";
+                alert.classList.remove('d-none');
+
+                setTimeout(() => {
+                    alert.classList.add('d-none');
+                    alert.innerHTML = '';
+                },2000);
+            setNote({title: '', description: '', tags: ''})
             // console.log(Math.ceil(Math.random(note.id) * 10000000000));
         }
     }
@@ -89,21 +100,24 @@ const AddNotes = () => {
         <div className="container my-4">
         <div className="row d-flex justify-content-center">
             <div className="col-lg-8">
+
+            <div id='success' className="alert alert-success  d-none text-center"></div>
+
                 <h1>Add Notes</h1>
                 <form>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title</label>
-                        <input type="text" className="form-control" id="title" name='title' aria-describedby="emailHelp" onChange={onChange}/>
+                        <input type="text" className="form-control" id="title" name='title' value={note.title} aria-describedby="emailHelp" onChange={onChange}/>
                         <p className="titleErrorMsg"></p>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Description</label>
-                        <input type="text" className="form-control" id="description" name='description' aria-describedby="emailHelp" onChange={onChange}/>
+                        <input type="text" className="form-control" id="description" name='description' value={note.description} aria-describedby="emailHelp" onChange={onChange}/>
                         <p className="descErrorMsg"></p>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="tags" className="form-label">Tags</label>
-                        <input type="text" className="form-control" id="tags" name='tags' aria-describedby="emailHelp" onChange={onChange}/>
+                        <input type="text" className="form-control" id="tags" name='tags' value={note.tags} aria-describedby="emailHelp" onChange={onChange}/>
                         <p className="tagErrorMsg"></p>
                     </div>
                     <button type="submit" className="btn btn-primary" onClick={NoteHandler}>Add Notes</button>

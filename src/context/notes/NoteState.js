@@ -119,18 +119,21 @@ const NoteState = (props)=>{
             body: JSON.stringify({title, description, tags})
         });
 
-        const json = response.json();
-        console.log(json)
+        const json =  await response.json();
+        // console.log(json)
+
+        let newState = JSON.parse(JSON.stringify(notes))
 
         // Login to Edit in Client
-        for (let index = 0; index < notes.length; index++) {
-            const element = notes[index];
+        for (let index = 0; index < newState.length; index++) {
+            const element = newState[index];
             if(element._id === id){
-                element.title = title;
-                element.description = description;
-                element.tags = tags;
+                newState[index].title = title;
+                newState[index].description = description;
+                newState[index].tags = tags;
             }
         }
+        setNotes(newState);
     }
 
 

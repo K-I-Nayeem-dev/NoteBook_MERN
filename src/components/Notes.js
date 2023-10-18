@@ -92,7 +92,7 @@ const Notes = () => {
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={NoteHandler}>Update Note</button>
+                <button  disabled={note.etitle.length < 5 || note.edescription.length < 5 || note.etags.length < 3}  type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={NoteHandler}>Update Note</button>
             </div>
             </div>
         </div>
@@ -110,6 +110,9 @@ const Notes = () => {
             <div className="col-lg-10">
                 <h2>Your Notes</h2>
                 <div className="row">
+                <div className="container">
+                {notes.length===0 && "No Notes Found"}
+                </div>
                 {notes.map((note)=>{
                     return <NoteItems key={note._id} updateNotes={updateNotes} note={note} num={num++} />
                 })}

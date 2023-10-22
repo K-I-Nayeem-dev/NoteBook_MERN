@@ -3,7 +3,7 @@ import React from 'react'
 const Alert = (props) => {
   return (
     <>
-    <div className="contianer">
+    <div className="contianer mt-3">
         <div className="row d-flex justify-content-center">
             <div className="col-lg-8">
                 <div className="alert alert-success text-center" role="alert">

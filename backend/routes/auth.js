@@ -23,6 +23,7 @@ const jsw_Screct = "nayeemisCodingNow";
         //validation fields End
     ],
     async (req, res) => {
+        let success = false;
         // Error Send to Server Start
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -35,7 +36,7 @@ const jsw_Screct = "nayeemisCodingNow";
         let user = await User.findOne({ email: req.body.email });
 
         if (user) {
-            return res.status(400).json("Please Enter a Valid Email");
+            return res.status(400).json(success,"Please Enter a Valid Email");
         }
 
         // Set Password Plain to Hash & Also Salt
@@ -59,7 +60,8 @@ const jsw_Screct = "nayeemisCodingNow";
         };
         // user Authentication Json web Token
         const authtoken = jwt.sign(data, jsw_Screct);
-        res.json({ authtoken });
+        success = true;
+        res.json({success, authtoken });
         } catch (error) {
         return res.status(500).json("Some Error Occurs!");
         }
@@ -81,6 +83,7 @@ router.post("/login",
         body("password", "Password field can not be blank").exists(),
     ],
     async (req, res) => {
+    let success = false;
     // Error Send to Server Start
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -99,18 +102,14 @@ router.post("/login",
 
       // check email and if email not found return a bad status
         if (!user) {
-            res
-            .status(400)
-            .json({ error: "please check your credentials and try again" });
+            return res.status(400).json({ success ,error: "please check your credentials and try again" });
         }
 
         // check Password and if Password not found return a bad status
         let passwordCompare = await bcrypt.compare(password, user.password);
 
         if (!passwordCompare) {
-            res
-            .status(400)
-            .json({ error: "please check your credentials and try again" });
+            return res.status(400).json({ error: "please check your credentials and try again" });
         }
 
       // Sending jsonwebtoken with id to user
@@ -123,11 +122,12 @@ router.post("/login",
             },
         };
         // user Authentication Json web Token
+        success = true;
         const authtoken = jwt.sign(data, jsw_Screct);
 
-        res.json({ authtoken });
+        res.json({ success, authtoken });
         } catch (error) {
-        return res.status(500).json({ error: "Some Error Occurs!" });
+        return res.status(400).json({ error: "Some Error Occurs!" });
         }
     }
 );
@@ -153,7 +153,7 @@ router.post("/fetchuser", fetchuser, async (req, res) => {
         res.send(user);
     } catch (error) {
         console.error(error); // Log the error for debugging purposes
-        return res.status(500).json({ error: "Some Error Occurs!" });
+        return res.status(400).json({ error: "Some Error Occurs!" });
     }
 });
 

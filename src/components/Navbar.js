@@ -1,10 +1,39 @@
-import React from 'react'
-import {Link, useLocation} from 'react-router-dom';
+import React, {useState} from 'react'
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 
 const Navbar = () => {
 
+    //redirect link to Home page
     let location = useLocation();
+    let navigate = useNavigate();
+
+    const [fetchUser, setFetchUser] = useState({email: 'AB@gmail.com', password: '123456789'})
+
+    // remove login token and redirect login page
+    const handleLogout = ()=>{
+        localStorage.removeItem('token');
+        navigate('/login');
+
+    }
+
+    // fetch User Information from Login Auth Token
+    const fetchUserData = async ()=>{
+        const response = await fetch('http://localhost:5000/auth/fetchuser', {
+                    method: "POST", 
+                    headers: {
+                        "auth-token": localStorage.getItem('token'),
+                    },
+                        body: JSON.stringify({email: fetchUser.email, password: fetchUser.password})
+                    });
+                
+                    const json = await response.json();
+                    console.log(json);
+                    // setFetchUser({...fetchUser})
+            navigate('/profile');
+            console.log("profile console")
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -24,10 +53,21 @@ const Navbar = () => {
                     <li className="nav-item">
                         <Link className={`nav-link ${location.pathname === '/blog' ? "Active" : ''}`} to="/blog">Blog</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${location.pathname === '/service' ? "Active" : ''}`} to="/service">Service</Link>
+                    </li>
 
                 </ul>
-                    <Link className="btn btn-primary mx-2 btn-sm" to="/login" role="button">Login</Link>
-                    <Link className="btn btn-primary btn-sm" to="/signup" role="button">Signup</Link>
+                    { !localStorage.getItem('token') ?
+                        <> 
+                            <Link className="btn btn-primary mx-2 btn-sm" to="/login" role="button">Login</Link>
+                            <Link className="btn btn-primary btn-sm" to="/signup" role="button">Signup</Link> 
+                        </> :
+                        <>
+                            <button className="btn btn-warning btn-sm me-3" onClick={fetchUserData}>Profile</button>
+                            <button className="btn btn-primary btn-sm" onClick={handleLogout}>Logout</button>
+                        </>
+                    }
                 </div>
             </div>
         </nav>

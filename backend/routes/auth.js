@@ -137,6 +137,7 @@ router.post("/login",
 //Route 3: Get User information to fetch token and header / Methos : Post '/auth/fetchuser' // Login Required/ Start
 
 router.post("/fetchuser", fetchuser, async (req, res) => {
+
     try {
 
         //fetch login user id from Database to JWT
@@ -147,12 +148,12 @@ router.post("/fetchuser", fetchuser, async (req, res) => {
         console.log(userId)
         //if user won't found then throw this error
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({error: "User not found" });
         }
         //if '/fetchuser' route works fine then res.send will show output in TCE 
         res.send(user);
     } catch (error) {
-        console.error(error); // Log the error for debugging purposes
+        console.error(error.message); // Log the error for debugging purposes
         return res.status(400).json({ error: "Some Error Occurs!" });
     }
 });

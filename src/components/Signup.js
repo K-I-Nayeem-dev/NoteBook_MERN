@@ -47,7 +47,7 @@ const Signup = () => {
                     
                     Toast.fire({
                         icon: 'success',
-                        title: 'Signup successfully'
+                        title: 'Account Created successfully'
                     })
                 }
                 else{

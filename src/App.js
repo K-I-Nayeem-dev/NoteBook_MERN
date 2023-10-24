@@ -10,6 +10,8 @@ import NoteState from './context/notes/NoteState';
 // import Alert from './components/Alert';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Profile from './components/Profile';
+import Service from './components/Service';
 
 function App() {
   const ref = useRef(null)
@@ -47,6 +49,14 @@ function App() {
           {/* //SignUp Section */}
           <Routes>
             <Route exact path='/signup' element={<> <Signup/> </>}/>
+          </Routes>
+
+          <Routes>
+            <Route exact path='/profile' element={<> <Profile/> </>}/>
+          </Routes>
+
+          <Routes>
+            <Route exact path='/service' element={<> <Service/> </>}/>
           </Routes>
 
         </div>

@@ -2,11 +2,15 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteContext from '../context/notes/NoteContext';
 import NoteItems from './NoteItems';
 import AddNotes from './AddNotes';
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+
 
 const Notes = () => {
 
     // Alert Message Hide and Show
 
+    let navigate = useNavigate();
     let alert = document.querySelector('#success');
 
     let num = 1;
@@ -18,7 +22,12 @@ const Notes = () => {
 
     // fetch Notes for client site//
     useEffect(() => {
-        getNotes();
+        if(localStorage.getItem('token')){
+            getNotes();
+        }
+        else{
+            navigate('/login')
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -38,6 +47,13 @@ const Notes = () => {
         // update successfully done message sent
         alert.innerHTML = "Edit Note Successfully";
         alert.classList.remove('d-none');
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Note Updated Successfully',
+            showConfirmButton: false,
+            timer: 1500
+        })
 
         setTimeout(() => {
             alert.classList.add('d-none');

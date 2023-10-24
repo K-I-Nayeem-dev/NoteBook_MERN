@@ -1,5 +1,7 @@
 import React, { useContext, useState }from 'react';
 import NoteContext from '../context/notes/NoteContext';
+import Swal from 'sweetalert2'
+
 
 const AddNotes = () => {
 
@@ -81,6 +83,14 @@ const AddNotes = () => {
                 // update successfully done message sent
                 alert.innerHTML = "Note Add Successfully";
                 alert.classList.remove('d-none');
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Note Add Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
 
                 setTimeout(() => {
                     alert.classList.add('d-none');

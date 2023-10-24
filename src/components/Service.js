@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
-import NoteContext from '../context/notes/NoteContext';
+import React from 'react';
 const Service = () => {
-    const val = useContext(NoteContext);
   return (
-    <h1>This is Service Part in Blog and Context Name {val.state.name} & Class {val.state.class}</h1>
+    <h1>This is Service Part in Blog and Context Name</h1>
   )
 }
 

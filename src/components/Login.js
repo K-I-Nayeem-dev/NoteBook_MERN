@@ -8,8 +8,8 @@ const Login = () => {
     let histroy = useNavigate();
 
     // Email & password input box define
-    let email = document.querySelector('#email');
-    let password = document.querySelector('#password');
+    let emaill = document.querySelector('#email');
+    let passwordd = document.querySelector('#password');
 
     // Email & Password error para define
     let emailError = document.querySelector('.emailError')
@@ -17,6 +17,7 @@ const Login = () => {
 
     const [cred_info, setCred_info] = useState({email: '', password: ''})
 
+    const {email, password} = cred_info;
 
     //Login Email & Password Check//
     const handleSubmit = async (e)=>{
@@ -26,23 +27,23 @@ const Login = () => {
         
             if(cred_info.email === ''){
                 console.log('Empty');
-                email.style.borderColor = "red";
+                emaill.style.borderColor = "red";
                 emailError.style.color = "red";
                 emailError.innerHTML = 'Plz Enter Email';
             }
             if(cred_info.password === ''){
                 console.log('Empty');
-                password.style.borderColor = "red";
+                passwordd.style.borderColor = "red";
                 passError.style.color = "red";
                 passError.innerHTML = 'Plz Enter Password';
             }
 
             if(cred_info.email){
-                email.style.borderColor = "gray";
+                emaill.style.borderColor = "gray";
                 emailError.innerHTML = '';
             }
             if(cred_info.password){
-                password.style.borderColor = "gray";
+                passwordd.style.borderColor = "gray";
                 passError.innerHTML = '';
             }
             
@@ -62,9 +63,6 @@ const Login = () => {
 
                         localStorage.setItem('token', json.authtoken);
                         histroy('/');
-
-                        console.log('login done');
-                        
                         //Sweet Alert
                         const Toast = Swal.mixin({
                             toast: true,
@@ -104,21 +102,26 @@ const Login = () => {
     return (
         <>
         <div className="container ">
-            <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center mt-5">
                 <div className="col-lg-6">
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label">Email address</label>
-                            <input type="email" className="form-control" value={cred_info.email} id="email" name="email" onChange={onChange} />
-                            <p className="emailError"></p>
+                    <div className="card">
+                        <div className="card-header text-center fw-bold">Signup</div>
+                        <div className="card-body">
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email address</label>
+                                    <input type="email" className="form-control" value={cred_info.email} id="email" name="email" onChange={onChange} />
+                                    <p className="emailError"></p>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <input type="password" className="form-control"  value={cred_info.password} id="password" name='password' onChange={onChange}/>
+                                    <p className="passError"></p>
+                                </div>
+                                <button disabled={email.length === 0 || password.length === 0} type="submit" className="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" className="form-control"  value={cred_info.password} id="password" name='password' onChange={onChange}/>
-                            <p className="passError"></p>
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

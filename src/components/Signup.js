@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import LoadingBar from 'react-top-loading-bar'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
 
@@ -101,7 +102,8 @@ const Signup = () => {
                                     <input type="password" className="form-control" id="confirm_password" name='confirm_password' value={signup.confirm_password} onChange={onChange} required minLength={5}/>
                                 </div>
 
-                                <button disabled={name.length === 0 || email.length === 0 || password.length === 0 || confirm_password.length === 0} onClick={() => setProgress(100)} type="submit" className="btn btn-primary">Sign in</button>
+                                <button disabled={name.length === 0 || email.length === 0 || password.length === 0 || confirm_password.length === 0} onClick={() => setProgress(100)} type="submit" className="btn btn-primary mb-3">Sign up</button>
+                                <p>Already Have An Account <Link to="/login" className="text-decoration-none fw-bold ">Login</Link> </p>
                             </form>
                         </div>
                     </div>

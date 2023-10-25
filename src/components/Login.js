@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Swal from 'sweetalert2'
 import {useNavigate} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // const Swal = require('sweetalert2')
 
 const Login = () => {
@@ -118,7 +119,8 @@ const Login = () => {
                                     <input type="password" className="form-control"  value={cred_info.password} id="password" name='password' onChange={onChange}/>
                                     <p className="passError"></p>
                                 </div>
-                                <button disabled={email.length === 0 || password.length === 0} type="submit" className="btn btn-primary">Submit</button>
+                                <button disabled={email.length === 0 || password.length === 0} type="submit" className="btn btn-primary mb-3 mt-2">Login</button>
+                                <p>Don't Have An Account <Link to="/signup" className="text-decoration-none fw-bold">SignUp</Link></p>
                             </form>
                         </div>
                     </div>

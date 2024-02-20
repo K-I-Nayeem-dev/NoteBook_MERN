@@ -1,7 +1,11 @@
-import React from 'react'
-
+import React, {useContext} from 'react'
+import NoteContext from '../context/notes/NoteContext';
 const Profile = () => {
   
+    const context = useContext(NoteContext);
+    const {fetchUserData} = context;
+    const {_id, name, email} = fetchUserData;
+
   return (
     <div className="container">
         <div className="row d-flex justify-content-center mt-5">
@@ -11,9 +15,9 @@ const Profile = () => {
                       <h3>Welcome</h3>
                     </div>
                     <div className="card-body py-4">
-                      <h5 className='my-3'>ID : </h5>
-                      <h5 className='my-3'>Name : </h5>
-                      <h5 className='my-3'>Email : </h5>
+                      <h5 className='my-3'>ID : {_id} </h5>
+                      <h5 className='my-3'>Name : {name} </h5>
+                      <h5 className='my-3'>Email : {email} </h5>
                     </div>
                 </div>
             </div>

@@ -28,35 +28,22 @@ function App() {
           {/* //Home Section */}
         
           <Routes>
+
             <Route exact path='/' element={<Home/>} />
-          </Routes>
+            {/* //About Section */}
+              <Route exact path='/about' element={<About/>} />
 
-          {/* //About Section */}
-          <Routes>
-            <Route exact path='/about' element={<About/>} />
-          </Routes>
+            {/* //Blog Section */}
+              <Route exact path='/blog' element={<> <Blog/> </>}/>
+            
+            {/* //Login Section */}
+              <Route exact path='/login' element={<> <Login/> </>}/>
+            
+            {/* //SignUp Section */}
+              <Route exact path='/signup' element={<> <Signup/> </>}/>
+              <Route exact path='/profile' element={<> <Profile/> </>}/>
+              <Route exact path='/service' element={<> <Service/> </>}/>
 
-          {/* //Blog Section */}
-          <Routes>
-            <Route exact path='/blog' element={<> <Blog/> </>}/>
-          </Routes>
-          
-          {/* //Login Section */}
-          <Routes>
-            <Route exact path='/login' element={<> <Login/> </>}/>
-          </Routes>
-          
-          {/* //SignUp Section */}
-          <Routes>
-            <Route exact path='/signup' element={<> <Signup/> </>}/>
-          </Routes>
-
-          <Routes>
-            <Route exact path='/profile' element={<> <Profile/> </>}/>
-          </Routes>
-
-          <Routes>
-            <Route exact path='/service' element={<> <Service/> </>}/>
           </Routes>
 
         </div>

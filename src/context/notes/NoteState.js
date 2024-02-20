@@ -33,6 +33,7 @@ import { useState } from "react";
 import Swal from 'sweetalert2'
 
 const NoteState = (props)=>{
+
     
     // fetch api url.....
     const host = "http://localhost:5000";
@@ -135,8 +136,30 @@ const NoteState = (props)=>{
     }
 
 
+    // fetch User Information from Login Auth Token
+    const [fetchUser, setFetchUser] = useState({email: 'A@gmail.com', password: '123456789'});
+
+    const {email, password} = fetchUser;
+
+     // fetch User Information from Login Auth Token
+    const fetchUserData = async ()=>{
+        const response = await fetch('http://localhost:5000/auth/fetchuser', {
+                    method: "POST", 
+                    headers: {
+                        "auth-token": localStorage.getItem('token'),
+                    },
+                        body: JSON.stringify({email: email, password: password})
+                    });
+                
+                    const json = await response.json();
+                    setFetchUser(json);
+                    console.log(json)
+                    // setFetchUser({...fetchUser})
+    }
+
+
     return(
-        <NoteContext.Provider value={{ notes,  addNotes, deleteNote, editNote , getNotes }}>
+        <NoteContext.Provider value={{ notes,  addNotes, deleteNote, editNote , getNotes , fetchUserData }}>
             {props.children}
         </NoteContext.Provider>
     )

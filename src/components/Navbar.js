@@ -1,37 +1,22 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {Link, useLocation, useNavigate} from 'react-router-dom';
+import NoteContext from '../context/notes/NoteContext';
 
 
 const Navbar = () => {
 
+    const context = useContext(NoteContext);
+    const {fetchUserData} = context;
+
     //redirect link to Home page
     let location = useLocation();
     let navigate = useNavigate();
-
-    const [fetchUser, setFetchUser] = useState({email: 'AB@gmail.com', password: '123456789'})
 
     // remove login token and redirect login page
     const handleLogout = ()=>{
         localStorage.removeItem('token');
         navigate('/login');
 
-    }
-
-    // fetch User Information from Login Auth Token
-    const fetchUserData = async ()=>{
-        const response = await fetch('http://localhost:5000/auth/fetchuser', {
-                    method: "POST", 
-                    headers: {
-                        "auth-token": localStorage.getItem('token'),
-                    },
-                        body: JSON.stringify({email: fetchUser.email, password: fetchUser.password})
-                    });
-                
-                    const json = await response.json();
-                    console.log(json);
-                    // setFetchUser({...fetchUser})
-            navigate('/profile');
-            console.log("profile console")
     }
 
     return (

@@ -53,4 +53,4 @@ This project is licensed under the [MIT License](LICENSE).
 - Node.js Documentation: [nodejs.org](https://nodejs.org/en/docs/)
 
 ## Contact
-For any inquiries or issues, please contact Kamrul Islam Nayeem at kamrulnayeem019@gmail.com
+For any inquiries or issues, please contact Kamrul Islam Nayeem at kamrulnayeem019@gmail.com.
